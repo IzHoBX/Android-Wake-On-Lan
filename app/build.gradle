@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.2'
 
     defaultConfig {
         applicationId "com.teamgy.wakeonlan"
@@ -30,10 +29,10 @@ repositories {
 
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.0'
-    compile 'com.android.support:design:23.2.0'
-    compile 'com.github.paolorotolo:appintro:3.3.0'
-    compile 'com.google.code.gson:gson:2.6.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:23.2.0'
+    implementation 'com.android.support:design:23.2.0'
+    implementation 'com.github.paolorotolo:appintro:3.3.0'
+    implementation 'com.google.code.gson:gson:2.6.1'
 }
