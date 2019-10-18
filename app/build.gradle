@@ -5,7 +5,7 @@ android {
 
     defaultConfig {
         applicationId "com.teamgy.wakeonlan"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 3
         versionName "1.0"
@@ -35,4 +35,5 @@ dependencies {
     implementation 'com.android.support:design:23.2.0'
     implementation 'com.github.paolorotolo:appintro:3.3.0'
     implementation 'com.google.code.gson:gson:2.6.1'
+
 }

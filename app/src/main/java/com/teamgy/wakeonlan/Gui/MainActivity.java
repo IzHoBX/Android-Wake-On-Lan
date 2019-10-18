@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.teamgy.wakeonlan.MyNotificationListener;
 import com.teamgy.wakeonlan.data.PCInfo;
 import com.teamgy.wakeonlan.R;
 import com.teamgy.wakeonlan.gui.settings.SettingsActivity;
@@ -30,10 +31,10 @@ import com.teamgy.wakeonlan.utils.Tools;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements OnCreateViewListener {
+public class MainActivity extends AppCompatActivity implements com.teamgy.wakeonlan.gui.OnCreateViewListener {
 
     public static final int RESULT_DELETE = 10;
-    private PCListHolderFragment mainFrag;
+    private com.teamgy.wakeonlan.gui.PCListHolderFragment mainFrag;
     final static int REQUEST_EDIT = 1;
     final static int REQUEST_ADD = 2;
 
@@ -67,13 +68,14 @@ public class MainActivity extends AppCompatActivity implements OnCreateViewListe
 
 
         if (savedInstanceState == null) {
-            mainFrag = new PCListHolderFragment();
+            mainFrag = new com.teamgy.wakeonlan.gui.PCListHolderFragment();
         } else {
-            mainFrag = (PCListHolderFragment) getFragmentManager().findFragmentById(R.id.fragment_container);
+            mainFrag = (com.teamgy.wakeonlan.gui.PCListHolderFragment) getFragmentManager().findFragmentById(R.id.fragment_container);
         }
         mainFrag.setOnCreateViewListener(this); //to set click listview listener
         replaceFragmentContainer(mainFrag, false);
 
+        startService(new Intent(this, MyNotificationListener.class));
 
     }
 
@@ -145,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements OnCreateViewListe
 
     public void startAddPcFragment(View view) {
 
-        Intent i = new Intent(this, EditPCActivity.class);
+        Intent i = new Intent(this, com.teamgy.wakeonlan.gui.EditPCActivity.class);
         i.putExtra("mode", REQUEST_ADD);
 
         View sharedView = findViewById(R.id.fab);
@@ -164,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements OnCreateViewListe
     public void startEditPCActivity(View view, PCInfo pcInfo, final int position) {
 
 
-        Intent i = new Intent(this, EditPCActivity.class);
+        Intent i = new Intent(this, com.teamgy.wakeonlan.gui.EditPCActivity.class);
         i.putExtra("mode", REQUEST_EDIT);
         if (pcInfo != null) {
             i.putExtra("pcInfo", pcInfo);
@@ -257,8 +259,8 @@ public class MainActivity extends AppCompatActivity implements OnCreateViewListe
 
         }
         //clickign the edit button
-        PcInfoAdapter adapter = (PcInfoAdapter) listView.getAdapter();
-        adapter.setCallback(new PcInfoAdapter.PCInfoAdapterCallback() {
+        com.teamgy.wakeonlan.gui.PcInfoAdapter adapter = (com.teamgy.wakeonlan.gui.PcInfoAdapter) listView.getAdapter();
+        adapter.setCallback(new com.teamgy.wakeonlan.gui.PcInfoAdapter.PCInfoAdapterCallback() {
             @Override
             public void configurePressed(PCInfo pcinfo, int position) {
                 startEditPCActivity(null,pcinfo,position);
@@ -267,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements OnCreateViewListe
         });
 
     }
-    public PCListHolderFragment getMainFrag() {
+    public com.teamgy.wakeonlan.gui.PCListHolderFragment getMainFrag() {
         return mainFrag;
     }
 
